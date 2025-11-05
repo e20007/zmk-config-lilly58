@@ -20,6 +20,54 @@
         };
     };
 
+    behaviors {
+        HRM_Rshift: HRM_Rshift {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HRM_RSHIFT";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            hold-trigger-key-positions = <0 1 2 3 4 5 14 15 13 25 26 27 28 37 38 39 40 41 17 16 29>;
+            hold-trigger-on-release;
+        };
+
+        HRM_Lshift: HRM_Lshift {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HRM_LSHIFT";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            hold-trigger-on-release;
+            hold-trigger-key-positions = <6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 44 45 46 47 48>;
+        };
+
+        HRM_R: HRM_R {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HRM_R";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            hold-trigger-key-positions = <0 1 2 3 4 5 14 15 13 25 26 27 28 37 38 39 40 41 17 16 29>;
+            hold-trigger-on-release;
+            flavor = "tap-preferred";
+        };
+
+        HRM_L: HRM_L {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HRM_L";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            hold-trigger-on-release;
+            hold-trigger-key-positions = <6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 44 45 46 47 48>;
+            flavor = "tap-preferred";
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -32,11 +80,11 @@
             //                     | ALT  | GUI  | LOWER|  SPACE |  | ENTER | RAISE| BSPC  | GUI   |
 
             bindings = <
-&kp EQUAL       &kp N1  &kp N2  &kp N3  &kp N4   &kp N5                              &kp N6     &kp N7  &kp N8     &kp N9   &kp N0         &kp MINUS
-&kp TAB         &kp Q   &kp W   &kp F   &kp P    &kp B                               &kp J      &kp L   &kp U      &kp Y    &kp SEMICOLON  &kp BACKSLASH
-&kp LCTRL       &kp A   &kp R   &kp S   &kp T    &kp G                               &kp M      &kp N   &kp E      &kp I    &kp O          &kp SQT
-&kp LEFT_SHIFT  &kp Z   &kp X   &kp C   &kp D    &kp V   &kp LEFT_ALT     &kp SPACE  &kp K      &kp H   &kp COMMA  &kp DOT  &kp FSLH       &kp RSHFT
-                                &mo 2   &kp DEL  &mo 3   &kp BACKSPACE    &kp RET    &kp RMETA  &mo 1   &none
+&kp EQUAL       &kp N1             &kp N2                 &kp N3              &kp N4                    &kp N5                              &kp N6          &kp N7                     &kp N8               &kp N9                  &kp N0              &kp MINUS
+&kp TAB         &kp Q              &kp W                  &kp F               &kp P                     &kp B                               &kp J           &kp L                      &kp U                &kp Y                   &kp SEMICOLON       &kp BACKSLASH
+&kp LCTRL       &HRM_L LEFT_ALT A  &HRM_L LEFT_CONTROL R  &HRM_L LEFT_META S  &HRM_Lshift LEFT_SHIFT T  &kp G                               &kp M           &HRM_Rshift RIGHT_SHIFT N  &HRM_R RIGHT_META E  &HRM_R RIGHT_CONTROL I  &HRM_R RIGHT_ALT O  &kp SQT
+&kp LEFT_SHIFT  &kp Z              &kp X                  &kp C               &kp D                     &kp V   &kp LEFT_ALT     &kp SPACE  &kp K           &kp H                      &kp COMMA            &kp DOT                 &kp FSLH            &kp RSHFT
+                                                          &mo 2               &kp DEL                   &mo 3   &kp BACKSPACE    &kp RET    &kp RIGHT_META  &mo 1                      &none
             >;
         };
 
@@ -76,11 +124,11 @@
             //                     |      |      |      |        |  |       |      |       |       |
 
             bindings = <
-&bootloader     &sys_reset        &none              &none              &out OUT_BLE   &out OUT_USB                     &none   &none   &none   &none  &none  &none
-&bt BT_CLR      &bt BT_SEL 0      &bt BT_SEL 1       &bt BT_SEL 2       &bt BT_SEL 3   &bt BT_SEL 4                     &none   &none   &none   &none  &none  &none
-&bt BT_CLR_ALL  &bt BT_DISC 0     &bt BT_DISC 1      &bt BT_DISC 2      &bt BT_DISC 3  &bt BT_DISC 4                    &none   &none   &none   &none  &none  &none
-&studio_unlock  &ext_power EP_ON  &ext_power EP_OFF  &ext_power EP_TOG  &none          &none          &trans    &trans  &none   &none   &none   &none  &none  &none
-                                                     &trans             &trans         &trans         &trans    &trans  &trans  &trans  &trans
+&bootloader     &bt BT_SEL 0      &bt BT_SEL 1       &bt BT_SEL 2       &bt BT_SEL 3   &bt BT_SEL 4                         &none   &none   &none   &none  &none  &none
+&bt BT_CLR      &none             &none              &none              &none          &none                                &none   &none   &none   &none  &none  &none
+&bt BT_CLR_ALL  &bt BT_DISC 0     &bt BT_DISC 1      &bt BT_DISC 2      &bt BT_DISC 3  &bt BT_DISC 4                        &none   &none   &none   &none  &none  &none
+&studio_unlock  &ext_power EP_ON  &ext_power EP_OFF  &ext_power EP_TOG  &out OUT_BLE   &out OUT_USB   &sys_reset    &trans  &none   &none   &none   &none  &none  &none
+                                                     &trans             &trans         &trans         &trans        &trans  &trans  &trans  &trans
             >;
         };
     };
